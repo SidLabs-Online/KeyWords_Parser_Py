@@ -20,17 +20,22 @@
   #     print (line)
 
 import urllib.request 
+from urllib.request import Request
 from bs4 import BeautifulSoup
-
+import counter
 
 def theParser():
   url = input('Enter the website to parse -> ') 
-  html = urllib.request.urlopen(url).read()
+  req = Request(url, headers={'User-Agent' : 'Mozilla/5.0'})
+  html = urllib.request.urlopen(req).read()
   
   soup = BeautifulSoup(html, 'html.parser')
-  
+
+  data = soup.get_text().strip()
+
+
   #print (soup.find_all('p'))
-  tags = soup.find_all('h1')
+  #tags = soup.find_all('h1')
   # for tag in tags:
   #    # Look at the parts of a tag
   #    print('TAG:', tag)
@@ -39,11 +44,13 @@ def theParser():
   #    print('Attrs:', tag.attrs)
 
   myText = open(r'dataFromWebsite.txt','w')
-  
-  for tag in tags:
-    myList = tag.contents[0]
 
-  for i in myList:
+  for i in data:
       myText.write(i)
 
   myText.close()
+  #print("Writing done!")
+
+  
+  counter.letsCount("dataFromWebsite.txt")
+  

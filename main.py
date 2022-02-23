@@ -1,37 +1,17 @@
-# from collections import Counter
-# import re
-
-# f = open("somefile.txt", "r")     
-# data = f.read()                   
-
-# data = data.lower()
-
-# data = re.sub("[^\w ]", "", data)
-
-# def Convert(tup, di):
-#     for a, b in tup:
-#         di.setdefault(a, []).append(b)
-#     return di
-      
-# output_data = {}
-
-
-# words = data.split(" ")
-# Counter(words)
-
-# filtered = Counter(words).most_common(30)
-# # print(filtered)
-
-# Convert(filtered, output_data)
-# # print(output_data)
-
-
-# #driver
-# for words, count in output_data.items():
-#   print (words, ":", count)
-
-
-# testing web parser
 import urlParser
+import counter
 
-urlParser.theParser()
+def userScreen():
+  userChoice = int(input("Please Choose :\n1 -> KW count from File\n2 -> KW count from website\n\t\t\t:"))
+  try:
+    if userChoice == 1:
+      counter.letsCount("testFile.txt")
+    elif userChoice == 2:
+      urlParser.theParser()
+      
+  except:
+    print("Please enter a valid choice!")
+    userScreen()
+
+# Driver 
+userScreen()
